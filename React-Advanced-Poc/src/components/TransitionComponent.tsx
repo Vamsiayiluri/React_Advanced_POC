@@ -10,7 +10,6 @@ const TransitionComponent: React.FC = () => {
   const [isPending, startTransition] = useTransition();
   const deferredQuery = useDeferredValue(query2);
   const items = Array.from({ length: 10000 }, (_, i) => `Item ${i + 1}`);
-  console.log("hello");
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
     startTransition(() => {

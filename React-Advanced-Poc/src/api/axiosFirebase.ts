@@ -12,14 +12,12 @@ const axiosFirebase: AxiosInstance = axios.create({
     (request: InternalAxiosRequestConfig) => {
         request.headers.channelName="Vamsi Ayiluri"
 
-        console.log("Request Config:", request); 
         return request;
     },
     (error: AxiosError) => Promise.reject(error)
   );
     axiosFirebase.interceptors.response.use(
         (response: AxiosResponse) => {
-            console.log("Response Data:", response.data); 
             return response;
         }, 
         async (error: AxiosError): Promise<AxiosResponse | void> => {

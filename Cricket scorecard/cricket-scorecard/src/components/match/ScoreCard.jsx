@@ -212,7 +212,6 @@ const Scorecard = () => {
       const bowlingTeam =
         currentInning.team === "teamA" ? teams.teamB : teams.teamA;
       setBowlingTeam(bowlingTeam);
-      console.log(teams.teamA, teams.teamB, battingTeam, bowlingTeam, "check");
       const { runs, wickets, overs, balls, batsmen, currentBowler } =
         currentInning;
       setCurrentInning(currentInning);
@@ -363,7 +362,6 @@ const Scorecard = () => {
                       </Typography>
                     )}
                   </Stack>
-                  {console.log(scoreCard.currentInning)}
                   {scoreCard.currentInning === 2 && (
                     <Typography variant="body2">
                       {getTargetText(
@@ -402,7 +400,6 @@ const Scorecard = () => {
                 </Paper>
               </Grid>
             </Grid>
-            {console.log(battingTeam, "batting team 1")}
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
                 <BattingScoreCard

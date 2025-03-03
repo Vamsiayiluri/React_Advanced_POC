@@ -7,7 +7,6 @@ const connectDB = async () => {
       tlsInsecure: true,
       serverSelectionTimeoutMS: 5000,
     });
-    console.log("✅ MongoDB Connected Successfully");
   } catch (error) {
     console.error("❌ MongoDB Connection Error:", error);
     process.exit(1);

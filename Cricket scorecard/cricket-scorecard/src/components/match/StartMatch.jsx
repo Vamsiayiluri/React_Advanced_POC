@@ -50,7 +50,6 @@ const StartMatch = ({ matchData, onStart }) => {
       alert("Please select the batting team, opening players, and bowler.");
       return;
     }
-    console.log(battingTeam, bowlingTeam, "data");
     const inningObj = {
       team: battingTeam,
       runs: 0,
@@ -99,7 +98,6 @@ const StartMatch = ({ matchData, onStart }) => {
     };
 
     if (matchData.scoreCard.currentInning) {
-      debugger;
       const updatedInnings = [...matchData.scoreCard.innings, inningObj];
 
       updatedMatchData = {
@@ -123,7 +121,6 @@ const StartMatch = ({ matchData, onStart }) => {
         updatedAt: new Date(),
       };
     }
-    console.log(updatedMatchData);
     onStart(updatedMatchData);
   };
 

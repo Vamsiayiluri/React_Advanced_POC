@@ -36,17 +36,13 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log("User connected:", socket.id);
-
   socket.on("joinChat", (chatId) => {
     socket.join(chatId);
-    console.log(`User joined chat: ${chatId}`);
   });
 
   socket.on(
     "sendMessage",
     async ({ chatId, senderId, text, recieverName, senderName }) => {
-      console.log("checked");
       try {
         const newMessage = new Message({
           chatId,
@@ -67,13 +63,9 @@ io.on("connection", (socket) => {
     }
   );
 
-  socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
-  });
+  socket.on("disconnect", () => {});
 });
 
 const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+server.listen(PORT, () => {});

@@ -13,7 +13,6 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 export const MuiCheckBox = () => {
   const [check, setCheck] = useState(false);
   const [skills, setSkills] = useState<string[]>([]);
-  console.log(skills);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCheck(e.target.checked);
   };

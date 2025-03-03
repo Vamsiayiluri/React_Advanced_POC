@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { connectSocket, disconnectSocket, socket } from "./webSocket/socket";
 import { receiveMessage } from "./redux/slices/messageSlice";
 import { updateLastMessage } from "./redux/slices/chatSlice";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,6 @@ const App: React.FC = () => {
   }, [dispatch]);
   return (
     <>
-      <h1>Welcome to My App</h1>
       <Router>
         <Routes>
           <Route path="/" element={<Homepage />} />

@@ -22,7 +22,6 @@ export default function MuiAutocomplete() {
   });
 
   const [value, setValue] = React.useState(null);
-  console.log(value, "value");
   return (
     <Stack spacing={1} sx={{ width: 300 }}>
       <Autocomplete

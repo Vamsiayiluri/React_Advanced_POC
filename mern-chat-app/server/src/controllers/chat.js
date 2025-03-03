@@ -4,7 +4,6 @@ const User = require("../models/User");
 exports.createChat = async (req, res) => {
   try {
     const { participants, lastMessage, id } = req.body;
-    console.log(participants, lastMessage, id, "participants, lastMessage, id");
 
     if (participants.length < 2) {
       return res
@@ -15,7 +14,6 @@ exports.createChat = async (req, res) => {
     const existingChat = await Chat.findOne({
       participants: { $all: participants },
     });
-    console.log(existingChat, "existingChat");
 
     if (existingChat) {
       return res
@@ -29,7 +27,6 @@ exports.createChat = async (req, res) => {
       lastMessage: lastMessage || "No messages yet",
       updatedAt: Date.now(),
     });
-    console.log(chat, "chat");
 
     await chat.save();
     res.status(201).json(chat);

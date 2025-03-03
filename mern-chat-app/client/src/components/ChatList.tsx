@@ -19,6 +19,7 @@ import {
   InputLabel,
   FormControl,
   Box,
+  Autocomplete,
 } from "@mui/material";
 import { fetchUsers } from "../redux/slices/userSlice";
 type Chat = {
@@ -40,7 +41,6 @@ const ChatList: React.FC = () => {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState<string>("");
   useEffect(() => {
-    debugger;
     const fetchData = async () => {
       let initialChats: any = await dispatch(fetchChats());
       await dispatch(fetchUsers());
@@ -73,7 +73,6 @@ const ChatList: React.FC = () => {
     name: string;
     email: string;
   }) => {
-    debugger;
     if (!loggedInUser) return;
     const participantIds = [loggedInUser.id, selectedUser.id].sort();
     const existingChat = chats?.find((chat) =>
@@ -99,29 +98,24 @@ const ChatList: React.FC = () => {
         padding: 2,
         display: "flex",
         flexDirection: "column",
-        height: "100%",
+        height: "calc(97vh-9vh)",
+        overflow: "auto",
       }}
     >
       <FormControl variant="outlined" fullWidth sx={{ marginBottom: 2 }}>
-        <InputLabel>Search by email</InputLabel>
-        <Select
-          value={searchQuery}
-          onChange={handleSearchChange}
-          label="Search by email"
-        >
-          <MenuItem value=""></MenuItem>
-          {users
-            .filter((user) => user.id !== loggedInUser.id)
-            .map((user) => (
-              <MenuItem
-                key={user.id}
-                value={user.name}
-                onClick={() => handleCreateChat(user)}
-              >
-                {user.name}
-              </MenuItem>
-            ))}
-        </Select>
+        <Autocomplete
+          options={users.filter((user) => user?.id !== loggedInUser?.id)}
+          getOptionLabel={(option) => option.name}
+          value={users.find((user) => user.name === searchQuery) || null}
+          onChange={(event, newValue) => {
+            if (newValue) {
+              handleCreateChat(newValue);
+            }
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Search by name" fullWidth />
+          )}
+        />
       </FormControl>
 
       <List>

@@ -18,7 +18,6 @@ import Badge, { badgeClasses } from "@mui/material/Badge";
 import React, { useState } from "react";
 export const MuiButton = () => {
   const [formats, setFormats] = useState<string[]>([]);
-  console.log(formats, "data");
   const handleFormatChange = (
     event: React.MouseEvent<HTMLElement>,
     updatedFormats: string[]

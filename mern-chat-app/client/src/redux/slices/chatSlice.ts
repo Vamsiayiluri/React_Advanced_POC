@@ -27,8 +27,6 @@ export const fetchChats = createAsyncThunk("chats/fetchChats", async () => {
 export const createChat = createAsyncThunk( 
   "chats/createChat",
   async (newChat: { id: string; participants: string[]; lastMessage: string }) => {
-    debugger
-    console.log('try hitting')
     const response = await api.post("/chats/createChat", newChat);
     return response.data;
   }
@@ -39,7 +37,6 @@ const chatSlice = createSlice({
   initialState,
   reducers: {
     setActiveChat(state, action: PayloadAction<string>) {
-      debugger
       state.activeChatId = action.payload;
     },
     updateLastMessage(state, action: PayloadAction<{ chatId: string; message: string }>) {
@@ -50,7 +47,6 @@ const chatSlice = createSlice({
       }
     },
     addChat(state, action: PayloadAction<Chat>) {
-      debugger
         state.chats.push(action.payload);
       },
       
@@ -60,7 +56,6 @@ const chatSlice = createSlice({
       state.chats = action.payload;
     });
     builder.addCase(createChat.fulfilled, (state, action) => {
-      console.log(action.payload,'check')
       state.chats.push(action.payload);
     });
   },

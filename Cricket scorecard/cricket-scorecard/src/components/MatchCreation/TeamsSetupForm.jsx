@@ -10,6 +10,8 @@ import {
   CardContent,
   IconButton,
   Divider,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -23,7 +25,14 @@ const TeamsSetupForm = ({ data, teamData, onUpdate }) => {
       : data;
 
   const [teams, setTeams] = useState(matchData);
+  const [error, setError] = useState(null);
 
+  const validatePlayerName = (name) => {
+    const regex = /^[A-Za-z\s]+$/;
+    return regex.test(name) && name.trim().length > 0;
+  };
+
+  // Handle team data changes
   const handleTeamChange = (teamKey, field, value) => {
     const updatedTeams = {
       ...teams,
@@ -46,21 +55,39 @@ const TeamsSetupForm = ({ data, teamData, onUpdate }) => {
     };
     setTeams(updatedTeams);
   }, [teams["teamB"].players]);
+  // Add a player to a team
+
   const addPlayer = (teamKey) => {
     const newPlayer = teams[teamKey].newPlayer.trim();
 
-    if (newPlayer) {
-      const updatedPlayers = [...teams[teamKey].players, newPlayer];
-
-      handleTeamChange(teamKey, "players", updatedPlayers);
+    // Validate player name
+    if (!validatePlayerName(newPlayer)) {
+      setError("Invalid player name (only alphabets and spaces allowed).");
+      return;
     }
+
+    // Check for duplicate player names
+    if (teams[teamKey].players.includes(newPlayer)) {
+      setError("Player name already exists in this team.");
+      return;
+    }
+
+    // Add player to the team
+    const updatedPlayers = [...teams[teamKey].players, newPlayer];
+    handleTeamChange(teamKey, "players", updatedPlayers);
   };
 
+  // Remove a player from a team
   const removePlayer = (teamKey, index) => {
     const updatedPlayers = teams[teamKey].players.filter(
       (_, playerIndex) => playerIndex !== index
     );
     handleTeamChange(teamKey, "players", updatedPlayers);
+  };
+
+  // Clear error message
+  const handleCloseError = () => {
+    setError(null);
   };
 
   return (
@@ -83,6 +110,7 @@ const TeamsSetupForm = ({ data, teamData, onUpdate }) => {
                   handleTeamChange(teamKey, "newPlayer", e.target.value)
                 }
                 margin="normal"
+                error={!!error}
               />
               <Button
                 sx={{
@@ -98,6 +126,8 @@ const TeamsSetupForm = ({ data, teamData, onUpdate }) => {
           </Box>
         ))}
       </Stack>
+
+      {/* Display players for both teams */}
       {(teams.teamA?.players || teams.teamB?.players) && (
         <Box sx={{ marginTop: 2, marginBottom: 5 }}>
           <Grid container spacing={2}>
@@ -166,6 +196,17 @@ const TeamsSetupForm = ({ data, teamData, onUpdate }) => {
           </Grid>
         </Box>
       )}
+
+      {/* Error Snackbar */}
+      <Snackbar
+        open={!!error}
+        autoHideDuration={6000}
+        onClose={handleCloseError}
+      >
+        <Alert severity="error" onClose={handleCloseError}>
+          {error}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

@@ -9,7 +9,6 @@ export const MuiSelect = () => {
   };
   const handleCountriesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
-    console.log(val);
     setCountries(typeof val === "string" ? val.split(",") : val);
   };
   return (
