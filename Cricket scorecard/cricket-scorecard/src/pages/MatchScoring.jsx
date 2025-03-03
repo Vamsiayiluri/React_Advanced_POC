@@ -34,7 +34,6 @@ const MatchScoring = () => {
   }, []);
 
   const startMatch = async (matchData) => {
-    debugger;
     await updateMatch(matchData);
     navigate(`/score-card?matchId=${matchData.matchId}`);
   };

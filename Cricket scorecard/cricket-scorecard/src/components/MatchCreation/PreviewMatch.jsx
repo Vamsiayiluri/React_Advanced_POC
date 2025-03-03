@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 
 const PreviewMatch = ({ data, onConfirm }) => {
-  console.log(data);
   const {
     matchDetails = {},
     teams = {},
