@@ -2,6 +2,17 @@ import React from "react";
 import { Card, CardContent, Typography } from "@mui/material";
 
 const MatchOverviewCard = () => {
+  useEffect(() => {
+    async function fetchMatchesData() {
+      try {
+        const data = await getMatches();
+      } catch (error) {
+        console.error("Failed to fetch match data:", error);
+      }
+    }
+
+    fetchMatchesData();
+  }, []);
   return (
     <Card>
       <CardContent>

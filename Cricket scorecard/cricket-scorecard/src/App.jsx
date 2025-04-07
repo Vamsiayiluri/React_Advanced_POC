@@ -10,6 +10,7 @@ import MatchCreationPage from "./pages/MatchCreationPage";
 import MatchScoring from "./pages/MatchScoring";
 import Scorecard from "./components/match/ScoreCard";
 import { Box } from "@mui/material";
+import MatchScoreCardPage from "./pages/MatchScorecardPage";
 const App = () => {
   return (
     <Box>
@@ -69,6 +70,14 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <MatchScoring />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/match-scorecard"
+              element={
+                <ProtectedRoute>
+                  <MatchScoreCardPage />
                 </ProtectedRoute>
               }
             />

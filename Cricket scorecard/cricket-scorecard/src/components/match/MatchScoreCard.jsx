@@ -14,9 +14,9 @@ import BattingScoreCard from "./BattingScoreCard";
 import BowlingScoreCard from "./BowlingScoreCard";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Margin } from "@mui/icons-material";
-function MatchScoreCard({ showScoreCard, setShowScoreCard, matchData }) {
-  const teamA = matchData.scoreCard.innings[0].team;
-  const teamB = matchData.scoreCard.innings[1].team;
+function MatchScoreCard({ showScoreCard = true, setShowScoreCard, matchData }) {
+  const teamA = matchData?.scoreCard?.innings[0].team;
+  const teamB = matchData?.scoreCard?.innings[1].team;
   const [firstbattingTeam, setFirstBattingTeam] = useState("");
   const [secondbattingTeam, setSecondBattingTeam] = useState("");
 
@@ -37,7 +37,7 @@ function MatchScoreCard({ showScoreCard, setShowScoreCard, matchData }) {
       setFirstBattingTeam(matchData.teams[teamA]);
       setSecondBattingTeam(matchData.teams[teamB]);
     }
-  }, []);
+  }, [matchData]);
   const handleBack = () => {
     setShowScoreCard(false);
   };
@@ -58,7 +58,7 @@ function MatchScoreCard({ showScoreCard, setShowScoreCard, matchData }) {
         <KeyboardBackspaceIcon></KeyboardBackspaceIcon>
       </Fab>
 
-      {showScoreCard && (
+      {showScoreCard && matchData?.scoreCard && (
         <Stack spacing={2}>
           <Accordion
             expanded={expanded === "teamA"}
